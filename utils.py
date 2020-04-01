@@ -7,17 +7,18 @@ def readJsonFile(filePath):
         return data
 
 
-
 def getStockDB():
     stocksDBpath = "./stocks.json"
     stocksDB = readJsonFile(stocksDBpath)
     return stocksDB
+
 
 def getStocksList():
 
     stocksDB = getStockDB()
     stocksList = stocksDB["Stocks"]
     return stocksList
+
 
 def getTickerList():
 
@@ -30,8 +31,6 @@ def getTickerList():
     return stockTickerList
 
 
-
-
 def getStock(ticker):
 
     stocksList = getStocksList()
@@ -41,6 +40,12 @@ def getStock(ticker):
             return stock
     
     raise Exception('The stock with the ticker {} is not in the database'.format(ticker))
+
+
+def isStockOnDB(ticker):
+    tickerList = getTickerList()
+    return ticker in tickerList
+
 
 
 

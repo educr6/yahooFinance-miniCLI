@@ -1,4 +1,5 @@
 import argparse
+import utils
 
 
 
@@ -15,11 +16,18 @@ def addStockTickerArgumentToArgsParser(parser):
 
 
 def main():
-    print("Hello World")
+
     parser = configureStocksCLIparser()
     args = parser.parse_args()
 
-    print (args.Stock)
+    if utils.isStockOnDB(args.Stock):
+        stock = utils.getStock(args.Stock)
+        print (stock)
+    else:
+        raise Exception("We need to scrap it")
+
+
+    
 
 
 
