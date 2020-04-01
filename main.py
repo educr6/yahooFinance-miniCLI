@@ -3,9 +3,10 @@ import argparse
 
 
 
-def configureStocksCLI():
+def configureStocksCLIparser():
     parser = argparse.ArgumentParser(description="Give stocks information from yahoo finance")
     addStockTickerArgumentToArgsParser(parser)
+    return parser
 
 
 def addStockTickerArgumentToArgsParser(parser):
@@ -15,6 +16,12 @@ def addStockTickerArgumentToArgsParser(parser):
 
 def main():
     print("Hello World")
+    parser = configureStocksCLIparser()
+    args = parser.parse_args()
+
+    print (args.Stock)
+
+
 
 
 if __name__ == "__main__":

@@ -1,8 +1,23 @@
 {
-    "Stocks": [
-        {
-            "TSLA": {
+    "Stocks":
+    [
+        
+             {
                 "Name": "Tesla, Inc.",
+                "Ticker": "TSLA",
+                "Previos Close": 524.00,
+                "Open": 504,
+                "Bid": "497.63 x 800",
+                "Ask": "498.49 x 900",
+                "Day's Range": "485.70 - 513.9548",
+                "52 Week Range": "176.99 - 968.99",
+                "Volume": 8948248,
+                "Avg. Volume": 20987232,
+                "TimeStamp": "2012-04-23T18:25:43.511Z"
+            },
+            {
+                "Name": "Apple, Inc.",
+                "Ticker": "AAPL",
                 "Previos Close": 524.00,
                 "Open": 504,
                 "Bid": "497.63 x 800",
@@ -14,6 +29,5 @@
                 "TimeStamp": "2012-04-23T18:25:43.511Z"
             }
 
-        }
     ]
 }
