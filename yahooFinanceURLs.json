@@ -1,0 +1,4 @@
+{
+    "baseURL": "https://finance.yahoo.com",
+    "stockURL": "https://finance.yahoo.com/quote/" 
+}
