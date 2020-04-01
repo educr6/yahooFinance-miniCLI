@@ -37,6 +37,20 @@ def getMarketCap(SoupObject):
     marketCap = marketCapHtml.span.string
     return marketCap
 
+def getCompanyName(SoupObject):
+
+    nameHTML = SoupObject.find('h1', {"class": "D(ib) Fz(18px)"})
+    companyName = nameHTML.string
+    companyName = extractTickerFromCompanyName(companyName)
+    return companyName
+
+def extractTickerFromCompanyName(nameWithTicker):
+    nameWithoutTicket = nameWithTicker.split('(')[0]
+    return nameWithTicker
+
+
+     
+
 
 """ def getCompanyName(ticker):
 
@@ -52,7 +66,9 @@ url = getYahooFinanceStockUrl(ticker)
 page = getYahooFinanceStockPage(ticker)
 
 soup = BeautifulSoup(page, 'html.parser')
-print (getMarketCap(soup))
+
+nameHTML = soup.find('h1', {"class": "D(ib) Fz(18px)"})
+print (nameHTML)
  
 
 
