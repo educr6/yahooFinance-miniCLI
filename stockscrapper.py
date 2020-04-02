@@ -3,13 +3,13 @@ import requests
 import utils
 
 
-def getYahooFinanceStockUrlWithoutTicker():
-    yahooFinanceURLsPath = "./yahooFinanceURLs.json"
+def getYahooFinanceStockUrlWithoutTicker(yahooFinanceURLsPath = "./yahooFinanceURLs.json"):
+    
     yahooFinanceURLJson = utils.readJsonFile(yahooFinanceURLsPath)
     return yahooFinanceURLJson['stockURL']
 
-def getYahooFinanceStockUrl(ticker):
-    url = getYahooFinanceStockUrlWithoutTicker() + ticker + "/"
+def getYahooFinanceStockUrl(ticker, yahooFinanceURLsPath = "./yahooFinanceURLs.json"):
+    url = getYahooFinanceStockUrlWithoutTicker(yahooFinanceURLsPath) + ticker + "/"
     return url
 
 
@@ -84,23 +84,17 @@ def getAllStockInfo(SoupObject):
     companyName = getCompanyName(SoupObject)
     ticker = extractTickerFromCompanyName(getCompanyNameWithTicker(SoupObject))
     stockTableInfo = getStockTableInfo(SoupObject)
+    marketCap = getMarketCap(SoupObject)
 
     stock = {}
     stock["Name"] = companyName
     stock["Ticker"] = ticker
+    stock["Market Cap"] = marketCap
     stock.update(stockTableInfo)
     return stock
 
 
 
-def writeStockIntoDB(stock):
-    
-    stocksDB = utils.getStockDB()
-    stocksDB["Stocks"].append(stock)
-
-    utils.writeJsonFile("./stocks.json", stocksDB )
-
-    return 1
 
 def getStockFromYahooFinance(ticker):
     page = getYahooFinanceStockPage(ticker)

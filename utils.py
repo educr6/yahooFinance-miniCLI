@@ -13,23 +13,23 @@ def writeJsonFile(filePath, data):
         json.dump(data, outfile)
 
 
-def getStockDB():
-    stocksDBpath = "./stocks.json"
+def getStockDB(stocksDBpath = "./stocks.json"):
+    
     stocksDB = readJsonFile(stocksDBpath)
     return stocksDB
 
 
-def getStocksList():
+def getStocksList(stocksDBpath = "./stocks.json"):
 
-    stocksDB = getStockDB()
+    stocksDB = getStockDB(stocksDBpath)
     stocksList = stocksDB["Stocks"]
     return stocksList
 
 
-def getTickerList():
+def getTickerList(stocksDBpath = "./stocks.json"):
 
     stockTickerList = []
-    stocksList = getStocksList()
+    stocksList = getStocksList(stocksDBpath)
     
     for stock in stocksList:
         stockTickerList.append(stock['Ticker'])
@@ -37,9 +37,9 @@ def getTickerList():
     return stockTickerList
 
 
-def getStock(ticker):
+def getStock(ticker, stocksDBpath = "./stocks.json"):
 
-    stocksList = getStocksList()
+    stocksList = getStocksList(stocksDBpath)
 
     for stock in stocksList:
         if stock['Ticker'] == ticker:
@@ -48,10 +48,16 @@ def getStock(ticker):
     raise Exception('The stock with the ticker {} is not in the database'.format(ticker))
 
 
-def isStockOnDB(ticker):
-    tickerList = getTickerList()
+def isStockOnDB(ticker, stocksDBpath = "./stocks.json"):
+    tickerList = getTickerList(stocksDBpath)
     return ticker in tickerList
 
+def writeStockIntoDB(stock):
+    
+    stocksDB = getStockDB()
+    stocksDB["Stocks"].append(stock)
+
+    writeJsonFile("./stocks.json", stocksDB )
 
 
 

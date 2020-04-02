@@ -1,6 +1,7 @@
 import argparse
 import utils
 import stockscrapper
+import pprint
 
 
 
@@ -26,11 +27,11 @@ def main():
         
     else:
         stock = stockscrapper.getStockFromYahooFinance(args.Stock)
-        stockscrapper.writeStockIntoDB(stock)
+        utils.writeStockIntoDB(stock)
 
 
     
-    print (stock)
+    pprint.pprint (stock)
 
 
     
