@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import utils
 
+
 def getYahooFinanceStockUrlWithoutTicker():
     yahooFinanceURLsPath = "./yahooFinanceURLs.json"
     yahooFinanceURLJson = utils.readJsonFile(yahooFinanceURLsPath)
@@ -26,11 +27,6 @@ def getYahooFinanceStockPage(ticker):
 
 
 
-
-
-
-
-
 def getMarketCap(SoupObject):
      
     marketCapHtml = SoupObject.find('td', {'data-test': 'MARKET_CAP-value'})
@@ -39,37 +35,82 @@ def getMarketCap(SoupObject):
 
 def getCompanyName(SoupObject):
 
-    nameHTML = SoupObject.find('h1', {"class": "D(ib) Fz(18px)"})
-    companyName = nameHTML.string
-    companyName = extractTickerFromCompanyName(companyName)
+    soup = SoupObject.find("div", {"class":"D(ib) Mt(-5px) Mend(20px) Maw(56%)--tab768 Maw(52%) Ov(h) smartphone_Maw(85%) smartphone_Mend(0px)" })
+    companyName = soup.div.string
+    companyName = removeTickerFromCompanyName(companyName)
     return companyName
 
+def getCompanyNameWithTicker(SoupObject):
+    soup = SoupObject.find("div", {"class":"D(ib) Mt(-5px) Mend(20px) Maw(56%)--tab768 Maw(52%) Ov(h) smartphone_Maw(85%) smartphone_Mend(0px)" })
+    companyNameWithTicker = soup.div.string
+    return companyNameWithTicker
+
+
+def removeTickerFromCompanyName(nameWithTicker):
+    NAME_INDEX = 1
+    nameWithoutTicker = nameWithTicker.split('-')[NAME_INDEX][1:]
+    return nameWithoutTicker
+
 def extractTickerFromCompanyName(nameWithTicker):
-    nameWithoutTicket = nameWithTicker.split('(')[0]
-    return nameWithTicker
+    TICKER_IDEX = 0
+    ticker = nameWithTicker.split('-')[TICKER_IDEX][:-1]
+    return ticker
 
 
+def getBeautifulSoupObject(page):
+    return BeautifulSoup(page, 'html.parser')
      
 
+def getStockTableInfo(SoupObject):
 
-""" def getCompanyName(ticker):
+    leftTable = SoupObject.find('table', {'class': "W(100%)"})
+    leftTableBody = leftTable.tbody
+    allTrs = leftTableBody.find_all('tr')
+
+    stock = {}
+
+    for row in allTrs:
+        
+        content = row.find_all('td')
+        info = content[0].string
+        value = content[1].string
+
+        stock[info] = value 
+    
+    return stock
+
+def getAllStockInfo(SoupObject):
+
+    companyName = getCompanyName(SoupObject)
+    ticker = extractTickerFromCompanyName(getCompanyNameWithTicker(SoupObject))
+    stockTableInfo = getStockTableInfo(SoupObject)
+
+    stock = {}
+    stock["Name"] = companyName
+    stock["Ticker"] = ticker
+    stock.update(stockTableInfo)
+    return stock
 
 
-def getStockTableInfo(ticker):
+
+def writeStockIntoDB(stock):
+    
+    stocksDB = utils.getStockDB()
+    stocksDB["Stocks"].append(stock)
+
+    utils.writeJsonFile("./stocks.json", stocksDB )
+
+    return 1
+
+def getStockFromYahooFinance(ticker):
+    page = getYahooFinanceStockPage(ticker)
+    soup = getBeautifulSoupObject(page)
+    stock = getAllStockInfo(soup)
+    return stock
 
 
-def writeStockIntoDB(stock):  """
 
-ticker = "AAPL"
 
-url = getYahooFinanceStockUrl(ticker)
-page = getYahooFinanceStockPage(ticker)
-
-soup = BeautifulSoup(page, 'html.parser')
-
-nameHTML = soup.find('h1', {"class": "D(ib) Fz(18px)"})
-print (nameHTML)
- 
 
 
 

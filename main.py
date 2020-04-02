@@ -1,5 +1,6 @@
 import argparse
 import utils
+import stockscrapper
 
 
 
@@ -22,9 +23,14 @@ def main():
 
     if utils.isStockOnDB(args.Stock):
         stock = utils.getStock(args.Stock)
-        print (stock)
+        
     else:
-        raise Exception("We need to scrap it")
+        stock = stockscrapper.getStockFromYahooFinance(args.Stock)
+        stockscrapper.writeStockIntoDB(stock)
+
+
+    
+    print (stock)
 
 
     

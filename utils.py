@@ -6,6 +6,12 @@ def readJsonFile(filePath):
         data = json.load(json_file)
         return data
 
+    
+def writeJsonFile(filePath, data):
+
+    with open(filePath, 'w') as outfile:
+        json.dump(data, outfile)
+
 
 def getStockDB():
     stocksDBpath = "./stocks.json"
