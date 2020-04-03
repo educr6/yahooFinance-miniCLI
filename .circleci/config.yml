@@ -25,8 +25,8 @@ jobs:
           name: Installing dependencies
           command: 
             
-            python -m pip install beautifulsoup4
-            python -m pip install pytest
+            pip install beautifulsoup4
+            
 
       - run:
           name: Unit Testing Step
