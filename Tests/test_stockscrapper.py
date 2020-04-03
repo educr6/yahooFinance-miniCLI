@@ -8,8 +8,8 @@ sys.path.insert(0,parentdir)
 import utils
 import stockscrapper
 
-dummyDB = "../stocksdummy.json"
-urlJsonPath  = "../yahooFinanceURLs.json"
+dummyDB = "./stocksdummy.json"
+urlJsonPath  = "./yahooFinanceURLs.json"
 
 
 def test_getYahooFinanceStockUrlWithoutTicker():

@@ -7,7 +7,7 @@ sys.path.insert(0,parentdir)
 
 import utils
 
-dummyDB = "../stocksdummy.json"
+dummyDB = "./stocksdummy.json"
 
 
 def test_getTickerList():
