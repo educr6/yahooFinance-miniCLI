@@ -26,11 +26,16 @@ jobs:
           command: 
             
             pip install beautifulsoup4
+            pip install pytest
 
       - run:
           name: Unit Testing Step
           command: |
             echo 'Unit Tests are about to run'
             pwd
+            cd Tests
+            pytest
+
+
 
 
