@@ -9,5 +9,13 @@ jobs:
       - run:
           name: The First Step
           command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+            echo 'Hello World! Construccion de Software'
+            echo 'This is the delivery pipeline using Circle CI'
+
+      - run:
+          name: Unit Testing Step
+          command: |
+            echo 'Unit Tests are about to run'
+            cd ./Tests
+            pytest
+
