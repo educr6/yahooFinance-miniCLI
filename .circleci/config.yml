@@ -13,13 +13,7 @@ jobs:
           command: |
             echo 'Hello World! Construccion de Software'
             echo 'This is the delivery pipeline using Circle CI'
-      - run:
-          name: Install Pip Env
-          command: |
-            
-            sudo pip install pipenv
-            pipenv install
-
+      
       
       - run:
           name: Installing dependencies
