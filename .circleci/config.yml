@@ -33,6 +33,7 @@ jobs:
           command: |
             echo 'Unit Tests are about to run'
             pwd
+            ls
             cd Tests
             pytest
 
