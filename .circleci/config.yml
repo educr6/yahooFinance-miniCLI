@@ -11,6 +11,9 @@ jobs:
           command: |
             echo 'Hello World! Construccion de Software'
             echo 'This is the delivery pipeline using Circle CI'
+      - run:
+          name: Install PIP
+          command: sudo easy_install pip
       
       - run:
           name: Installing dependencies
