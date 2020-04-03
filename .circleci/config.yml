@@ -14,11 +14,17 @@ jobs:
             echo 'Hello World! Construccion de Software'
             echo 'This is the delivery pipeline using Circle CI'
       
+      - run:
+          name: Setting up Pip
+          command: |
+          curl https://bootstrap.pypa.io/get-pip.py | python
+
+      
       
       - run:
           name: Installing dependencies
           command: 
-            curl https://bootstrap.pypa.io/get-pip.py | python
+            
             pip install beautifulsoup4
 
       - run:
