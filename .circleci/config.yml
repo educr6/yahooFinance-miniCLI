@@ -3,6 +3,10 @@ version: 2.1
 
 jobs:
   build:
+    working_directory: ~/yahooFinance-miniCLI
+
+    docker:
+      - image: circleci/python:3.6.4
     steps:
       - run:
           name: The First Step
@@ -10,8 +14,11 @@ jobs:
             echo 'Hello World! Construccion de Software'
             echo 'This is the delivery pipeline using Circle CI'
       - run:
-          name: Install PIP
-          command: sudo easy_install pip
+          name: Install Pip Env
+          command: |
+            sudo pip install pipenv
+            pipenv install
+
       
       - run:
           name: Installing dependencies
