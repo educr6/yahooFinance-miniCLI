@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Setting up Pip
           command: |
-          curl https://bootstrap.pypa.io/get-pip.py | python
+            curl https://bootstrap.pypa.io/get-pip.py | python
 
       
       
