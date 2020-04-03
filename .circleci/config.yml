@@ -24,9 +24,9 @@ jobs:
       - run:
           name: Installing dependencies
           command: 
-            pip install pytest
-            pip install requests
-            pip install beautifulsoup4
+            pipenv install pytest
+            pipenv install requests
+            pipenv install beautifulsoup4
 
       - run:
           name: Unit Testing Step
