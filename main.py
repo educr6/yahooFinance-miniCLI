@@ -2,7 +2,7 @@ import argparse
 import utils
 import stockscrapper
 import pprint
-#import datetime
+import datetime
 
 
 
@@ -31,7 +31,7 @@ def main():
         utils.writeStockIntoDB(stock)
 
 
-    #pprint.pprint("As of {}, this is the stock information:\n".format(datetime.datetime.now().strftime("%c")))
+    pprint.pprint("As of {}, this is the stock information:\n".format(datetime.datetime.now().strftime("%c")))
     pprint.pprint (stock)
 
 
