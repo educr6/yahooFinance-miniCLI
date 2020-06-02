@@ -20,7 +20,7 @@ def getYahooFinanceStockPage(ticker):
     url = getYahooFinanceStockUrl(ticker)
     page = requests.get(url)
 
-    if page.status_code == 200:
+    if page.status_code == HTTPOKSTATUS:
         return page.content
     
     raise Exception("The ticker {} could not be found in Yahoo Finance".format(ticker))
